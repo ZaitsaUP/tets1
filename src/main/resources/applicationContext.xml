@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+
+    <context:property-placeholder location="musicPlayer.properties"/>
+
+
+    <bean id="classicalMusicBean"
+          class="firstspring.ClassicalMusic"
+          init-method="doInit"
+          destroy-method="doDestroy"
+    />
+    <bean id="rockMusicBean"
+          class="firstspring.RockMusic"
+          scope="prototype"
+          factory-method="getNewRockMusic"
+    />
+    <bean id="alternativeMusik"
+          class="firstspring.AlternativeMusic"
+    />
+
+
+    <bean id="musicPlayer"
+          class="firstspring.MusicPlayer"
+          scope="prototype"
+          init-method="doInit"
+          destroy-method="doDestroy">
+        <constructor-arg>
+            <list>
+                <ref bean="alternativeMusik"/>
+                <ref bean="rockMusicBean"/>
+            </list>
+        </constructor-arg>
+        <property name="music">
+            <list>
+                <ref bean="rockMusicBean"/>
+                <ref bean="alternativeMusik"/>
+            </list>
+        </property>
+        <property name="volume" value="${musicPlayer.volume}"/>
+        <property name="name" value="${musicPlayer.name}"/>
+
+    </bean>
+
+
+</beans>
