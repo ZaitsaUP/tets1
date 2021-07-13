@@ -1,5 +1,9 @@
 package firstspring;
 
+
+import org.springframework.stereotype.Component;
+
+@Component("someClassicalMusic")
 public class ClassicalMusic implements Music{
 
     public void doInit(){
