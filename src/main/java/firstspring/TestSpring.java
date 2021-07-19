@@ -6,6 +6,7 @@ import java.util.MissingFormatArgumentException;
 
 public class TestSpring {
     public static void main(String[] args) {
+
         ClassPathXmlApplicationContext context =
                 new ClassPathXmlApplicationContext("applicationContext.xml");
         ClassicalMusic classicalMusic = context.getBean("someClassicalMusic", ClassicalMusic.class);
